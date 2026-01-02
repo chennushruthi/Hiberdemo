@@ -1,16 +1,13 @@
 package chennu.com.hiberdemo;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.persistence.Id;
-
 @Entity
-@Table(name="emp")
 public class student {
      @Id
      private int Id;
      private String name;
-     private String dept;
+     private int marks;
 	public int getId() {
 		return Id;
 	}
@@ -23,11 +20,17 @@ public class student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDept() {
-		return dept;
+	public int getMarks() {
+		return marks;
 	}
-	public void setDept(String dept) {
-		this.dept = dept;
+	public void setMarks(int marks) {
+		this.marks = marks;
 	}
-     
+	@Override
+	public String toString() {
+		return "student [Id=" + Id + ", name=" + name + ", marks=" + marks + ", getId()=" + getId() + ", getName()="
+				+ getName() + ", getMarks()=" + getMarks() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
 }

@@ -1,9 +1,13 @@
  package chennu.com.hiberdemo;
 
+import java.util.List;
+import java.util.Random;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 public class App {
 
@@ -28,68 +32,23 @@ public class App {
         SessionFactory sf = con.buildSessionFactory();
         Session session = sf.openSession();
         Transaction t = session.beginTransaction();
-
-        student st = new student();
-        st.setId(1);
-        st.setName("Shruthi");
-        st.setDept("CSE");
-
-        session.persist(st);
-
-        t.commit();
-        session.close();
-        sf.close();
-
-        System.out.println("Inserted successfully");
-    }
-
-    // UPDATE DATA
-    public static void update_data() {
-
-        Configuration con = new Configuration()
-                .configure()
-                .addAnnotatedClass(student.class);
-
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction t = session.beginTransaction();
-
-        student st = new student();
-        st.setId(1);   // Existing ID
-        st.setName("Aswitha");
-        st.setDept("CSE");
-
-        session.merge(st);
-
-        t.commit();
-        session.close();
-        sf.close();
-
-        System.out.println("Updated successfully");
-    }
-
-    // DELETE DATA
-    public static void delete_data() {
-
-        Configuration con = new Configuration()
-                .configure()
-                .addAnnotatedClass(student.class);
-
-        SessionFactory sf = con.buildSessionFactory();
-        Session session = sf.openSession();
-        Transaction t = session.beginTransaction();
-
-        student st = session.find(student.class, 1);
-
-        if (st != null) {
-            session.remove(st);
-            System.out.println("Deleted successfully");
-        } else {
-            System.out.println("Student not found");
+        //Random r=new Random();
+        //for(int i=1;i<=60;i++) {
+        	//student s=new student();
+        	//s.setId(i);
+        	//s.setName("A4" + i);
+        	//s.setMarks(r.nextInt(100));
+        	//session.persist(s);
+           	
+        //}
+        //t.commit();
+        
+        //System.out.println("Records Inserted successfully");
+        Query q=session.createQuery("from student");
+        List<student> students=q.list();
+        for(student s:students) {
+        	System.out.println(s);
         }
-
-        t.commit();
-        session.close();
-        sf.close();
+        
     }
 }
